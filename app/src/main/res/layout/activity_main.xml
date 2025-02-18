@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Player 1 Layout -->
+    <LinearLayout
+        android:id="@+id/AttributsJoueur1"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/player1_zone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/player1_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/luffy" />
+
+            <TextView
+                android:id="@+id/player1Role"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Player 1: Role"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/player1_turn_indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/your_turn"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/fullLogButtonPlayer1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Afficher le journal complet"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_log1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rollDiceButtonPlayer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="Lancer le dé"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/Player1Result"
+                android:layout_width="252dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Score" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Plateau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- Board View -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="352dp">
+
+            <com.example.carbon_quest_game.BoardView
+                android:id="@+id/boardview"
+                android:layout_width="match_parent"
+                android:layout_height="333dp"
+                android:layout_marginVertical="16dp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Player 2 Layout -->
+    <LinearLayout
+        android:id="@+id/AttributsJoueur2"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/player2_zone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/player2_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/zorro" />
+
+            <TextView
+                android:id="@+id/player2Role"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Player 2: Role"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/player2_turn_indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/your_turn"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/fullLogButtonPlayer2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="Afficher le journal complet"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_log2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rollDiceButtonPlayer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="Lancer le dé"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/Player2Result"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Score"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/Des"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp">
+
+        <ImageView
+            android:id="@+id/dice1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toStartOf="@+id/dice2"
+            android:background="#00000000"
+            app:srcCompat="@drawable/dice3d160" />
+
+        <ImageView
+            android:id="@+id/dice2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="0dp"
+            android:background="#00000000"
+            android:scaleX="-1"
+            app:srcCompat="@drawable/dice3d160" />
+    </RelativeLayout>
+
+</LinearLayout>
