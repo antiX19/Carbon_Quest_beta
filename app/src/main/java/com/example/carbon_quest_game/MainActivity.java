@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         players[currentPlayer].move(totalDiceResult);
 
         boardView.setPlayerTokenPositions(players[0].getPosition(), players[1].getPosition());
+        boardView.invalidate();
 
         resolveTile(players[currentPlayer]);
 
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1 : showPopup("Action exécutée : Manger sainement et équilibré \nEmpreinte carbone : " + player.reduceCarbon(611*rand) + " T/an, coût : " + player.spendEcoCash(2000*rand) + " EcoCash");
                 case 2 : showPopup("Action exécutée : Augmenter sa consommation de viande\nEmpreinte carbone : "  + player.increaseCarbon(500*rand) + " T/an, coût : " + player.spendEcoCash(1000*rand) + " EcoCash");
                 case 3 : showPopup("Action exécutée : Faire attention à sa consommation énergétique\nEmpreinte carbone : " + player.reduceCarbon(750*rand) + " T/an, coût : " + player.spendEcoCash(2000*rand) + " EcoCash.");
-                case 4 : showPopup("Action exécutée : Achat de matériaux énergivores et non-responsables\nEmpreinte carbone : " + player.increaseCarbon(1000*rand) +  + player.spendEcoCash(1000*rand) + " EcoCash");
+                case 4 : showPopup("Action exécutée : Achat de matériaux énergivores et non-responsables\nEmpreinte carbone : " + player.increaseCarbon(500*rand) +  + player.spendEcoCash(1000*rand) + " EcoCash");
                 case 5 : showPopup("Action exécutée : Prendre l'avion à chaque déplacement longue distance\nEmpreinte carbone : " + player.increaseCarbon(500*rand) + " T/an, coût : " +  player.spendEcoCash(1000*rand) + " EcoCash");
                 case 6 : showPopup("Action exécutée : Prendre des transports éco-responsables\nEmpreinte carbone : " + player.reduceCarbon(820*rand) + " T/an, coût : " + player.spendEcoCash(2000*rand));
             }
@@ -209,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             showPopup("Chance Bonus : +5000 EcoCash.");
         } else {
             player.spendEcoCash(1000);
-            player.increaseCarbon(165);
+            player.increaseCarbon(0);
             Taxe += 1000;
             showPopup(player.getName() + "a obtenu un malus : -1000 EcoCash et + 1000 d'Empreinte carbone.\n1000 EcoCash rajouté à la cagnotte");
         }
@@ -286,18 +287,18 @@ public class MainActivity extends AppCompatActivity {
             handleActionTile(player);
         }
 
+        if (player.getEcoCash() <= 0) {
+            showPopup(player.getName() + " n'a plus d'argent !");
+            navigateorRestart();
+        }
+
         // Vérification de la condition de victoire
         if (player.getCarbonFootprint() <= 2000) {
             showPopup(player.getName() + " a atteint un bilan carbone de 2000 T/an et remporte la partie !");
             navigateorRestart();
         }
         updateUI();
-
-        boardView.setPlayerTokenPositions(players[0].getPosition(), players[1].getPosition());
     }
-
-
-
     private void navigateorRestart() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Rejouer une partie ?");
@@ -322,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
         currentPlayer = random.nextInt(players.length);
         Player1Result.setText("");
         Player2Result.setText("");
-        boardView.setPlayerTokenPositions(players[0].getPosition(), players[1].getPosition());
+        boardView.setPlayerTokenPositions(0,0);
         rollDiceButtonPlayer1.setEnabled(true);
         rollDiceButtonPlayer2.setEnabled(true);
         fullLog.setLength(0);

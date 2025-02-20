@@ -82,13 +82,13 @@
         <!-- Board View -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="352dp">
+            android:layout_height="match_parent">
 
             <com.example.carbon_quest_game.BoardView
                 android:id="@+id/boardview"
                 android:layout_width="match_parent"
                 android:layout_height="333dp"
-                android:layout_marginVertical="16dp" />
+                android:layout_marginVertical="0dp" />
         </FrameLayout>
 
     </LinearLayout>
@@ -97,7 +97,7 @@
     <LinearLayout
         android:id="@+id/AttributsJoueur2"
         android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_height="115dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -147,8 +147,8 @@
                 android:id="@+id/rollDiceButtonPlayer2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="8sp"
                 android:text="Lancer le dé"
+                android:textSize="8sp"
                 android:visibility="invisible" />
 
             <TextView
@@ -165,31 +165,25 @@
     <RelativeLayout
         android:id="@+id/Des"
         android:layout_width="wrap_content"
-        android:layout_height="43dp">
+        android:layout_height="47dp">
 
         <ImageView
             android:id="@+id/dice1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="117dp"
+            android:layout_height="47dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@+id/dice2"
             android:background="#00000000"
             app:srcCompat="@drawable/dice3d160" />
 
         <ImageView
             android:id="@+id/dice2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_width="133dp"
+            android:layout_height="46dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="0dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="0dp"
             android:background="#00000000"

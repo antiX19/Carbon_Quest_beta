@@ -12,6 +12,9 @@ import android.graphics.Rect;
 
 public class BoardView extends View {
 
+    private static final int BOARD_SIZE = 32; // Nombre total de cases sur le plateau
+    private static final int BOARD_WIDTH = 800; // Largeur du plateau en pixels
+    private static final int BOARD_HEIGHT = 800; // Hauteur du plateau en pixels
     private Bitmap bitmap;
     private Paint paint;
     private int player1Position = 0;
@@ -54,7 +57,7 @@ public class BoardView extends View {
         super.onDraw(canvas);
         Rect dest = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
         canvas.drawBitmap(bitmap, null, dest, paint);
-
+        setPlayerTokenPositions(0,0);
         int[] coords1 = getTokenCoordinates(player1Position, dest);
         int[] coords2 = getTokenCoordinates(player2Position, dest);
         setTokenSize(100,100);
@@ -80,8 +83,8 @@ public class BoardView extends View {
     }
 
     private int[] getTokenCoordinates(int cell, Rect dest) {
-        int cellWidth = dest.width() / 5;
-        int cellHeight = dest.height() / 5;
+        int cellWidth = dest.width() / 8;
+        int cellHeight = dest.height() / 8;
         int x, y;
 
         if (cell == 0) {

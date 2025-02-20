@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/display_settings"
         android:layout_centerVertical="true"
-        android:layout_marginTop="229dp"
+        android:layout_marginTop="215dp"
         android:src="@drawable/homepagetitle" />
 
     <Button
@@ -47,6 +47,7 @@
 
     <ToggleButton
         android:id="@+id/toggleMusicButton"
+        android:layout_marginLeft="140dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible" />
@@ -74,22 +75,18 @@
 
     <Button
         android:id="@+id/btn_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/playButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="139dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="8dp"
+        android:background="#00000000"
+        android:clickable="true"
         android:focusable="true"
         android:onClick="exitApp"
         android:text="@string/sortie"
-        android:background="#00000000"
-        android:clickable="true"
         android:textAllCaps="false"
         android:textSize="20sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
