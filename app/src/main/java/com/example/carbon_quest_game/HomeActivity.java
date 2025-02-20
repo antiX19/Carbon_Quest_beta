@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initializeBackgroundMusic() {
-        backgroundMusic = MediaPlayer.create(this, R.raw.soundtrack1);
+        backgroundMusic = MediaPlayer.create(this, R.raw.shake_dice);
         backgroundMusic.setLooping(true);
         startMusic();
     }
