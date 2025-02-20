@@ -6,7 +6,7 @@ Réalisé par : Antoine Ettori
 
 
 ## Aperçu du Projet
-Quête Carbone est un jeu de plateau interactif conçu dans le cadre du projet de Java en EISC E5 pour sensibiliser les joueurs à la réduction de leur empreinte carbone. Le jeu propose une expérience dynamique et captivante pour deux joueurs, où chacun incarne un rôle unique, prend des décisions stratégiques et rivalise pour atteindre la plus faible empreinte carbone.
+Carbon Quest est un jeu de plateau interactif conçu dans le cadre du projet de Java en EISC E5 pour sensibiliser les joueurs à la réduction de leur empreinte carbone. Le jeu propose une expérience dynamique et captivante pour deux joueurs, où chacun incarne un rôle unique, prend des décisions stratégiques et rivalise pour atteindre la plus faible empreinte carbone.
 
 ## Fonctionnalités
 - Jeu de plateau interactif axé sur la réduction de l'empreinte carbone.
@@ -41,6 +41,8 @@ Quête Carbone est un jeu de plateau interactif conçu dans le cadre du projet d
 - **MainActivity.java** : Gère les mécaniques principales du jeu.
 - **BoardView.java** : Vue personnalisée pour le rendu du plateau de jeu et des pions des joueurs.
 - **Player.java** : Définit les rôles des joueurs et leurs attributs.
+- **Cards** et **CardsManager** :Assure la logique du jeu en implémentant les effets d’arriver sur les cases correspondantes.
+
 
 ### Fichiers Clés
 - `app/src/main/res/layout/` : Contient les fichiers XML pour l'interface utilisateur.
