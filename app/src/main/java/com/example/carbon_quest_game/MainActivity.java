@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private int Taxe;
@@ -38,22 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        rollDiceButtonPlayer1 = findViewById(R.id.rollDiceButtonPlayer1);
-        rollDiceButtonPlayer2 = findViewById(R.id.rollDiceButtonPlayer2);
-        dice1Image = findViewById(R.id.dice1);
-        dice2Image = findViewById(R.id.dice2);
-        Player1Result = findViewById(R.id.Player1Result);
-        Player2Result = findViewById(R.id.Player2Result);
-        player1_turn_indicator = findViewById(R.id.player1_turn_indicator);
-        player2_turn_indicator = findViewById(R.id.player2_turn_indicator);
-        fullLogButtonPlayer1 = findViewById(R.id.fullLogButtonPlayer1);
-        fullLogButtonPlayer2 = findViewById(R.id.fullLogButtonPlayer2);
-        boardView = findViewById(R.id.boardview);
-
-        dice1Image.setImageResource(R.drawable.dice3d160);
-        dice2Image.setImageResource(R.drawable.dice3d160);
-
+        init();
         players = new Player[]{
                 new Player.Directrice(),
                 new Player.Directrice()
@@ -75,6 +63,22 @@ public class MainActivity extends AppCompatActivity {
 
         fullLogButtonPlayer2.setOnClickListener(view -> showPopup(fullLog.toString()));
     }
+
+    private void init(){
+        rollDiceButtonPlayer1 = findViewById(R.id.rollDiceButtonPlayer1);
+        rollDiceButtonPlayer2 = findViewById(R.id.rollDiceButtonPlayer2);
+        dice1Image = findViewById(R.id.dice1);
+        dice2Image = findViewById(R.id.dice2);
+        Player1Result = findViewById(R.id.Player1Result);
+        Player2Result = findViewById(R.id.Player2Result);
+        player1_turn_indicator = findViewById(R.id.player1_turn_indicator);
+        player2_turn_indicator = findViewById(R.id.player2_turn_indicator);
+        fullLogButtonPlayer1 = findViewById(R.id.fullLogButtonPlayer1);
+        fullLogButtonPlayer2 = findViewById(R.id.fullLogButtonPlayer2);
+        boardView = findViewById(R.id.boardview);
+        dice1Image.setImageResource(R.drawable.dice3d160);
+        dice2Image.setImageResource(R.drawable.dice3d160);
+    }
     @SuppressLint("SetTextI18n")
     private void rollDice() {
         if (diceSound != null) {
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         players[currentPlayer].move(totalDiceResult);
 
-        boardView.setPlayerTokenPositions(players[0].getPosition(), players[1].getPosition());
+        boardView.setPlayerPositions(players[0].getPosition(), players[1].getPosition());
         boardView.invalidate();
 
         resolveTile(players[currentPlayer]);
@@ -219,101 +223,83 @@ public class MainActivity extends AppCompatActivity {
         player.gainEcoCash(Taxe);
         showPopup(player.getName() + " a gagné : " + Taxe);
     }
-    private void resolveTile(com.example.carbon_quest_game.Player player) {
-        int pos = player.getPosition()%32;
 
+    private void resolveTile(com.example.carbon_quest_game.Player player) {
+        int pos = player.getPosition() % 32;
+        String playerName = player.getName();
+
+        Set<Integer> actionTiles = new HashSet<>(Arrays.asList(1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 27, 29, 30, 31));
+        Set<Integer> chanceTiles = new HashSet<>(Arrays.asList(4, 12, 20, 28));
+        Set<Integer> restTiles = new HashSet<>(Arrays.asList(8, 24));
+
+        // ✅ Résolution de la case
         if (pos == 0) {
             player.gainEcoCash(4000);
-            showPopup(player.getName() + " est sur la case départ : Gain = 4000 EcoCash.");
-        }
-        // Cases 1 à 3 : Actions
-        else if (pos >= 1 && pos <= 3) {
+            showPopup(playerName + " est sur la case départ : Gain = 4000 EcoCash.");
+        } else if (actionTiles.contains(pos)) {
             handleActionTile(player);
-        }
-        // Case 4 : Chance
-        else if (pos == 4) {
+        } else if (chanceTiles.contains(pos)) {
             handleChanceTile(player);
-        }
-        // Cases 5 à 7 : Actions
-        else if (pos >= 5 && pos <= 7) {
-            handleActionTile(player);
-        }
-        // Case 8 : Repos
-        else if (pos == 8) {
-            showPopup(player.getName() + " est sur une case Repos : Aucun effet.");
-        }
-        // Cases 9 à 11 : Actions
-        else if (pos >= 9 && pos <= 11) {
-            handleActionTile(player);
-        }
-        // Case 12 : Chance
-        else if (pos == 12) {
-            handleChanceTile(player);
-        }
-        // Cases 13 à 15 : Actions
-        else if (pos >= 13 && pos <= 15) {
-            handleActionTile(player);
-        }
-        // Case 16 : Taxe
-        else if (pos == 16) {
+        } else if (restTiles.contains(pos)) {
+            showPopup(playerName + " est sur une case Repos : Aucun effet.");
+        } else if (pos == 16) {
             handleTaxTile(player);
         }
-        // Cases 17 à 19 : Actions
-        else if (pos >= 17 && pos <= 19) {
-            handleActionTile(player);
-        }
-        // Case 20 : Chance
-        else if (pos == 20) {
-            handleChanceTile(player);
-        }
-        // Cases 21 à 23 : Actions
-        else if (pos >= 21 && pos <= 23) {
-            handleActionTile(player);
-        }
-        // Case 24 : Repos
-        else if (pos == 24) {
-            showPopup(player.getName() + " est sur une case Repos : Aucun effet.");
-        }
-        // Cases 25 à 27 : Actions
-        else if (pos >= 25 && pos <= 27) {
-            handleActionTile(player);
-        }
-        // Case 28 : Chance
-        else if (pos == 28) {
-            handleChanceTile(player);
-        }
-        // Cases 29 à 31 : Actions
-        else if (pos >= 29 && pos <= 31) {
-            handleActionTile(player);
-        }
 
+        // ✅ Vérification des conditions de fin de partie
         if (player.getEcoCash() <= 0) {
-            showPopup(player.getName() + " n'a plus d'argent !");
-            navigateorRestart();
+            showAlertDialog(
+                    playerName + currentPlayer + " a perdu",
+                    playerName + " n'a plus d'EcoCash et perd la partie.",
+                    "Ok",
+                    this::navigateorRestart
+            );
+        } else if (player.getCarbonFootprint() <= 2000) {
+            showAlertDialog(
+                    playerName + currentPlayer + " a gagné",
+                    playerName + " a atteint un bilan carbone de 2000 T/an et remporte la partie !",
+                    "Ok",
+                    this::navigateorRestart
+            );
         }
 
-        // Vérification de la condition de victoire
-        if (player.getCarbonFootprint() <= 2000) {
-            showPopup(player.getName() + " a atteint un bilan carbone de 2000 T/an et remporte la partie !");
-            navigateorRestart();
-        }
         updateUI();
     }
+
+
     private void navigateorRestart() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Rejouer une partie ?");
-        builder.setMessage("Choisissez entre revenir à l'accueil ou redémarrer une partie");
-        builder.setPositiveButton("Menu", (dialog, which) -> {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        });
-        builder.setNegativeButton("Relancer", (dialog, which) -> {
-            restartGame();
-        });
-        builder.setCancelable(false);
-        builder.show();
+        showAlertDialog(
+                "Rejouer une partie ?",
+                "Choisissez entre revenir à l'accueil ou redémarrer une partie",
+                "Menu", () -> returnToHome(),
+                "Relancer", this::restartGame
+        );
     }
+    private void showAlertDialog(String title, String message, String positiveButtonText, Runnable positiveAction) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(positiveButtonText, (dialog, which) -> positiveAction.run())
+                .setCancelable(false)
+                .show();
+    }
+    private void showAlertDialog(String title, String message, String positiveButtonText, Runnable positiveAction, String negativeButtonText, Runnable negativeAction) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(positiveButtonText, (dialog, which) -> positiveAction.run())
+                .setNegativeButton(negativeButtonText, (dialog, which) -> negativeAction.run())
+                .setCancelable(false)
+                .show();
+    }
+
+    // ✅ Redirection vers l'accueil
+    private void returnToHome() {
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void restartGame() {
         players = new com.example.carbon_quest_game.Player[]{
@@ -323,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
         currentPlayer = random.nextInt(players.length);
         Player1Result.setText("");
         Player2Result.setText("");
-        boardView.setPlayerTokenPositions(0,0);
+        boardView.setPlayerPositions(0,0);
         rollDiceButtonPlayer1.setEnabled(true);
         rollDiceButtonPlayer2.setEnabled(true);
         fullLog.setLength(0);

@@ -26,7 +26,8 @@ public class Player {
     }
 
     public int reduceCarbon(int amount) {
-        return carbonFootprint = Math.max(0, carbonFootprint - amount);
+            carbonFootprint = (carbonFootprint - amount < 0) ? 0 : (carbonFootprint - amount);
+            return carbonFootprint;
     }
 
     public int getEcoCash() {
@@ -34,7 +35,8 @@ public class Player {
     }
 
     public int spendEcoCash(int amount) {
-        return ecoCash -= amount;
+        ecoCash = (ecoCash < amount) ? amount : (ecoCash - amount);
+        return ecoCash;
     }
 
     public int gainEcoCash(int amount) {
